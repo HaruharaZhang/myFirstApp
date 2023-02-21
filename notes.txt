@@ -1,0 +1,30 @@
+##这里记录的是我的笔记
+开启服务        cd myFirstApp && ./vendor/bin/sail up
+创建数据库表格   ./vendor/bin/sail artisan make:mode Animal -m
+使用设置生成表格 ./vendor/bin/sail artisan migrate
+
+回滚版本        ./vendor/bin/sail artisan migrate:rollback
+回滚至空的数据库 ./vendor/bin/sail artisan migrate:reset
+
+
+创建一个Seeder文件 ./vendor/bin/sail artisan make:seeder AnimalTableSeeder
+使用 seed 恢复数据库 ./vendor/bin/sail artisan db:seed
+
+创建一个Factory文件，用于生成随机数据 ./vendor/bin/sail artisan make:factory 
+（注意这里需要给他指定一个名字）
+（更改完factory文件后，使用 Artisan migrate:fresh --seed 刷新）
+或者把整个数据库丢了再重新用seed创建一次也行
+
+以后想要使用数据库的话，可以使用
+$user = DB::table('users') -> where('name','John') -> first();
+这一行代码会返回所有用户名中带有 John 的用户 
+
+Tinker 相关：
+开启Tinker，数据库测试工具  ./vendor/bin/sail tinker
+创建一个对象 $cat = new Animal;
+给对象添加信息 $cat -> name = "Garfield";
+$cat -> weight = 500.0;
+使用call方法保存对象 $cat -> save();
+查看所有添加的对象 Animal::get();
+将得到的数据赋值$allAnimals = Animal::get();
+获取特定index的数据 $allAnimals[1]
