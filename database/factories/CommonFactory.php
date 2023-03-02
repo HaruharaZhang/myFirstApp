@@ -6,12 +6,11 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Faker\Factory as Faker;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class PostFactory extends Factory
+class CommonFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,13 +19,10 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $faker = Faker::create();
         return [
-            //'user_id' => $faker -> randomNumber($min = 123456, $max = 123460),
             'user_id' => User::all() -> random() -> id,
-            'title' => Str::random(10),
-            'desc' => Str::random(20),
-            'message' => Str::random(40),
+            'post_id' => Post::all() -> random() -> id,
+            'CommonMsg' => Str::random(40),
         ];
     }
 }
