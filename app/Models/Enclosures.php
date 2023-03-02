@@ -6,12 +6,12 @@ use App\Models\Animal;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmergencyContact extends Model
+class Enclosures extends Model
 {
     use HasFactory;
 
-    //一对一
-    public function animal(){
-        return $this -> belongsTo(Animal::class);
+    //一对多
+    public function animals(){
+        return $this -> hasMany(Animal::class);
     }
 }
