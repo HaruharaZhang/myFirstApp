@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this -> call (EnclosuresTableSeeder::class);
+        $this -> call (EnclosureTableSeeder::class);
         $this -> call (AnimalTableSeeder::class);
         $this -> call (EmergencyContactsTableSeeder::class);
 

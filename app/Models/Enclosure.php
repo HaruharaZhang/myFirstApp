@@ -6,7 +6,7 @@ use App\Models\Animal;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Enclosures extends Model
+class Enclosure extends Model
 {
     use HasFactory;
 

@@ -18,16 +18,7 @@ return new class extends Migration
             $table->string('userEmail')->unique();
             $table->string('userName');
             $table->timestamps();
-            //$table->timestamp('joinDate')->nullable();
             $table->string('icon');
-
-            //$table->id();
-            //$table->string('email')->unique();
-            //$table->string('name');
-            // $table->timestamp('email_verified_at')->nullable();
-            // $table->string('password');
-            // $table->rememberToken();
-            //$table->timestamps();
         });
     }
 

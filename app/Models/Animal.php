@@ -18,6 +18,6 @@ class Animal extends Model
 
     //一对多
     public function enclosure(){
-        return $this -> belongsTo(Enclosures::class);
+        return $this -> belongsTo(Enclosure::class);
     }
 }

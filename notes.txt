@@ -29,3 +29,5 @@ $cat -> weight = 500.0;
 将得到的数据赋值$allAnimals = Animal::get();
 获取特定index的数据 $allAnimals[1]
 要批量添加数据，前往seed中查看
+显示数据库中的所有表格 $tables = \DB::select('show tables');
+
