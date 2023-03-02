@@ -24,9 +24,12 @@ class PostFactory extends Factory
         return [
             //'user_id' => $faker -> randomNumber($min = 123456, $max = 123460),
             'user_id' => User::all() -> random() -> id,
-            'title' => Str::random(10),
-            'desc' => Str::random(20),
-            'message' => Str::random(40),
+            //'title' => Str::random(10),
+            'title' => $faker -> realText(rand(10, 20)),
+            //'desc' => Str::random(20),
+            'desc' => $faker -> sentence,
+            //'message' => Str::random(40),
+            'message' => $faker -> text(),
         ];
     }
 }
