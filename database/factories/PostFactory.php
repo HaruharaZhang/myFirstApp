@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -18,7 +19,10 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-
+            'user_id' => 123456,
+            'title' => Str::random(10),
+            'desc' => Str::random(20),
+            'message' => Str::random(40),
         ];
     }
 }

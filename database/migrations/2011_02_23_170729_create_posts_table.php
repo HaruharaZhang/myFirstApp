@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             //$table -> primary(['postId', 'userId']);
             $table -> id();
             $table -> bigInteger('user_id') -> unsigned();
