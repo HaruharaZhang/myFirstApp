@@ -31,3 +31,17 @@ $cat -> weight = 500.0;
 要批量添加数据，前往seed中查看
 显示数据库中的所有表格 $tables = \DB::select('show tables');
 
+在某些情况下，可以试试取消掉括号
+比如 Animal::find(1) -> enclosure
+
+##邮箱验证服务
+开启服务后，前往 http://localhost:8025/  即可查看邮箱服务器
+
+使用如下命令创建一个验证系统的 start ket 
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail composer require laravel/breeze --dev
+./vendor/bin/sail artisan breeze:install
+./vendor/bin/sail npm install
+./vendor/bin/sail artisan migrate
+
+
