@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +32,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/zoo', function () {
     return view('zoo');
 });
+
+Route::get('/animals', [AnimalController::class, 'index']);
+
+Route::get('/animals/{id}', [AnimalController::class, 'show']);
 
 require __DIR__.'/auth.php';
