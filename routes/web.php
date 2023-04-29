@@ -59,6 +59,8 @@ Route::get('/animals/{id}', [AnimalController::class, 'show']) -> name('animals.
 //Route::post('animals', 'AnimalController@store') -> name('animals.store');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store')->middleware('auth');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create')->middleware('auth');
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
@@ -73,7 +75,6 @@ Route::get('/users/register', [RegisteredUserController::class, 'create'])->name
 //Route::get('/users/home', 'HomeController@index')->name('home');
 Route::get('/users/home', [HomeController::class, 'index'])->name('home');
 
-//Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
 
 
