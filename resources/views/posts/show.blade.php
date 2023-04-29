@@ -53,30 +53,48 @@
 
 @push('scripts')
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // 处理表单的提交
-    $('#comment-form').submit(function (event) {
-      event.preventDefault();
+    document.addEventListener("DOMContentLoaded", function() {
+        // 处理表单的提交
+        $('#comment-form').submit(function(event) {
+            event.preventDefault();
 
-      $.ajax({
-        // url: $(this).attr('action'),
-        url: "{{ route('comments.store', $post) }}",
-        type: 'POST',
-        data: $(this).serialize(),
-        success: function (response) {
-          // 在评论列表中添加新的评论
-          var comment = response.common;
-          var html = '<li class="media my-4"><img class="mr-3 rounded-circle" src="{{ asset(Auth::user()->avatar) }}" alt="User Avatar" width="50" height="50"><div class="media-body"><h5 class="mt-0 mb-1">' + '{{ Auth::user()->name }}' + '</h5><p>' + comment.CommonMsg + '</p><p>' + comment.created_at + '</p></div></li>';
-          $('ul.list-unstyled').append(html);
+            $.ajax({
+                // url: $(this).attr('action'),
+                url: "{{ route('comments.store', $post) }}",
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    // 在评论列表中添加新的评论
+                    var comment = response.common;
+                    var formattedDate = formatDateTime(comment.created_at);
+                    //var html = '<li class="media my-4"><img class="mr-3 rounded-circle" src="{{ asset(Auth::user()->avatar) }}" alt="User Avatar" width="50" height="50"><div class="media-body"><h5 class="mt-0 mb-1">' + '{{ Auth::user()->name }}' + '</h5><p>' + comment.CommonMsg + '</p><p>' + comment.created_at + '</p></div></li>';
+                    var html = '<li class="media my-4" style="display: none;"><img class="mr-3 rounded-circle" src="{{ asset(Auth::user()->avatar) }}" alt="User Avatar" width="50" height="50"><div class="media-body"><h5 class="mt-0 mb-1">' + '{{ Auth::user()->name }}' + '</h5><p>' + comment.CommonMsg + '</p><p>' + formattedDate + '</p></div></li>';
+                    $('ul.list-unstyled').append(html);
 
-          // 清空表单内容
-          $('#content').val('');
-        },
-        error: function (xhr, status, error) {
-          alert('发表评论失败，请稍后重试');
-        }
-      });
+                    // 将新评论添加到评论列表并使用动画效果显示
+                    var newComment = $(html);
+                    $('ul.list-unstyled').append(newComment);
+                    newComment.slideDown(500).fadeIn(500);
+
+                    // 清空表单内容
+                    $('#content').val('');
+                },
+                error: function(xhr, status, error) {
+                    alert('发表评论失败，请稍后重试');
+                }
+            });
+        });
     });
-  });
+    function formatDateTime(dateTimeStr) {
+    var date = new Date(dateTimeStr);
+    var year = date.getFullYear();
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+    var hours = ("0" + date.getHours()).slice(-2);
+    var minutes = ("0" + date.getMinutes()).slice(-2);
+    var seconds = ("0" + date.getSeconds()).slice(-2);
+
+    return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+}
 </script>
 @endpush
