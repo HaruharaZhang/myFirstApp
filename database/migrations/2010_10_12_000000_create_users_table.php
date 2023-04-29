@@ -27,6 +27,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('avatar')->nullable(); // 添加头像字段
             $table->timestamps();
         });
     }
@@ -38,6 +39,9 @@ return new class extends Migration
      */
     public function down()
     {
+        // Schema::table('posts', function (Blueprint $table) {
+        //     $table->dropForeign('posts_user_id_foreign');
+        // });    
         Schema::dropIfExists('users');
     }
 };

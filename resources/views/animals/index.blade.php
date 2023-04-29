@@ -12,6 +12,7 @@
         border: 1px solid black;
     }
 </style>
+<a href="{{route('animals.create')}}">Create Animal</a>
 <table style="width:100%">
     <tr>
         <th>Id</th>

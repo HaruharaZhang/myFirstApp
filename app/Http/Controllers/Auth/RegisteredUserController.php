@@ -18,9 +18,26 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create()
     {
-        return view('auth.register');
+        if (Auth::check()) {
+            return redirect('/users/home');
+        }
+        
+        $images = [
+            'profiles/110.jpg',
+            'profiles/111.jpg',
+            'profiles/112.jpg',
+            'profiles/113.jpg',
+            'profiles/114.jpg',
+            'profiles/115.jpg',
+            'profiles/116.jpg',
+            'profiles/117.jpg',
+            'profiles/118.jpg',
+            'profiles/119.jpg',
+            'profiles/120.jpg',
+        ];
+        return view('users.register', compact('images'));
     }
 
     /**
@@ -30,6 +47,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        //dd($request->all());
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
@@ -40,12 +59,11 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'avatar' => $request->avatar,
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
-
         return redirect(RouteServiceProvider::HOME);
     }
 }

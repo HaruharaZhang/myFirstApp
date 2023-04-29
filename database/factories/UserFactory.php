@@ -27,6 +27,7 @@ class UserFactory extends Factory
             'email' => fake() -> unique() -> safeEmail(),
             'name' => fake() -> name(),
             'password' => Hash::make(Str::random(10)),
+            'avatar' => 'profiles/' . $faker->numberBetween(110, 168) . '.jpg',
             //'joinDate' => now(),
             //'icon' => Str::random(10),
 

@@ -44,4 +44,5 @@ $cat -> weight = 500.0;
 ./vendor/bin/sail npm install
 ./vendor/bin/sail artisan migrate
 
-
+./vendor/bin/sail php artisan route:clear
+php artisan route:cache

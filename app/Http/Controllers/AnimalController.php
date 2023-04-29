@@ -25,7 +25,7 @@ class AnimalController extends Controller
      */
     public function create()
     {
-        //
+        return view('animals.create');
     }
 
     /**
@@ -36,7 +36,13 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request -> validate([
+            'name' => 'required|max:255',
+            'weight' => 'required|numeric',
+            'date_of_birth' => 'nullable|date',
+            'enclosure_id' => 'required|integer',
+        ]);
+        return "Passed Validation";
     }
 
     /**
@@ -48,6 +54,11 @@ class AnimalController extends Controller
     public function show($id)
     {
         $animal = Animal::findOrFail($id);
+        //dd($animal);
+        //dd是一个很有效的debug 工具
+        //代码会在dd这一行停止运行
+
+        //同样，可以使用ddd来唤出web的debug页面
         return view('animals.show', ['animal' => $animal]);
     }
 
