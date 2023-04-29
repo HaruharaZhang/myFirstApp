@@ -8,9 +8,15 @@
     @foreach($posts as $post)
     <a href="{{ route('posts.show', $post->id) }}" class="card-link">
       <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ $post->title }}</h5>
-          <p class="card-text">{{ $post->excerpt }}</p>
+        <div class="card-body d-flex">
+          <div class="avatar-container">
+            <img src="{{ asset($post->user->avatar) }}" alt="User Avatar" width="50" height="50" class="mr-3 rounded-circle">
+          </div>
+          <div>
+            <h5 class="card-title">{{ $post->title }}</h5>
+            <p class="card-text">{{ $post->desc }}</p>
+            <p class="card-time" style="color: gray; font-size: 12px;">Publish at: {{ $post->created_at->format('Y-m-d h:m') }}</p>
+          </div>
         </div>
       </div>
     </a>
@@ -25,6 +31,7 @@
 
 @section('styles')
 <style>
+
   .card-list {
     display: flex;
     /* 设置弹性布局 */
@@ -79,6 +86,14 @@
     font-size: 16px;
     /* 设置卡片正文字体大小 */
     margin-bottom: 15px;
+    /* 设置卡片正文下方边距 */
+  }
+
+  .card-time {
+    color: gray;
+    font-size: 12px;
+    /* 设置卡片正文字体大小 */
+    margin-bottom: 10px;
     /* 设置卡片正文下方边距 */
   }
 
