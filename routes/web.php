@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\MyLoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,7 +63,11 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store')->middleware('auth');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create')->middleware('auth');
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
 
 //Route::get('/users/login', [LoginController::class, 'showLoginForm'])->name('users.login');
 Route::get('/users/login', [MyLoginController::class, 'showLoginForm'])->name('users.login');
@@ -74,6 +79,10 @@ Route::get('/users/register', [RegisteredUserController::class, 'create'])->name
 
 //Route::get('/users/home', 'HomeController@index')->name('home');
 Route::get('/users/home', [HomeController::class, 'index'])->name('home');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update')->middleware('auth');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy')->middleware('auth');
 
 
 

@@ -14,7 +14,7 @@ class Post extends Model
         'title',
         'desc',
         'message',
-        'user_id', // 添加这一行
+        'user_id',
     ];
 
     public function user(){

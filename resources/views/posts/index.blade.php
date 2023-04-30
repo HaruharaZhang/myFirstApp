@@ -12,6 +12,7 @@
           <div class="avatar-container">
             <img src="{{ asset($post->user->avatar) }}" alt="User Avatar" width="50" height="50" class="mr-3 rounded-circle">
           </div>
+
           <div>
             <h5 class="card-title">{{ $post->title }}</h5>
             <p class="card-text">{{ $post->desc }}</p>
@@ -31,7 +32,6 @@
 
 @section('styles')
 <style>
-
   .card-list {
     display: flex;
     /* 设置弹性布局 */

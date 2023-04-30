@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Common extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'CommonMsg',
+    ];
 
     public function user(){
         return $this -> belongsTo(User::class);

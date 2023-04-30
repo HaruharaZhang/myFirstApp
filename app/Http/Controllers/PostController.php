@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Policies\PostPolicy;
+
 
 class PostController extends Controller
 {
@@ -25,7 +27,7 @@ class PostController extends Controller
     {
         return view('posts.create');
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -44,5 +46,27 @@ class PostController extends Controller
         $post->save();
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
+    }
+    public function edit(Post $post)
+    {
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'desc' => 'required',
+            'message' => 'required',
+        ]);
+
+        $post->update($validatedData);
+        return redirect()->route('posts.show', $post)->with('success', 'Post updated successfully');
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return redirect()->route('home')->with('success', 'Post deleted successfully');
     }
 }

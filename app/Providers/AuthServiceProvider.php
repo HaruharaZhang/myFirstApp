@@ -4,9 +4,13 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Common;
+use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
+
     /**
      * The model to policy mappings for the application.
      *
@@ -14,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Post::class => PostPolicy::class,
     ];
 
     /**
@@ -23,8 +28,20 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
+        //$this->registerPolicies();
 
-        //
+        // Post 授权策略
+        Gate::define('update-post', function ($user, $post) {
+            return $user->id === $post->user_id || $user->name === 'admin';
+        });
+
+        // Comment 授权策略
+        Gate::define('update-comment', function ($user, $comment) {
+            return $user->id === $comment->user_id || $user->name === 'admin';
+        });
+
+        Gate::define('delete-comment', function (User $user, Common $comment) {
+            return $user->id === $comment->user_id || $user->name === 'admin';
+        });
     }
 }

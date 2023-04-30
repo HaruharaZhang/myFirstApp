@@ -16,11 +16,22 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $posts = Post::where('user_id', $user->id)->get();
-        $comments = Common::where('user_id', $user->id)->get();
+        //$posts = Post::where('user_id', $user->id)->get();
+        // 设置每页显示 6 条数据
+        //$posts = Post::where('user_id', $user->id)->paginate(6);
+        //$comments = Common::where('user_id', $user->id)->get();
+        // 每页显示6条评论
+        //$comments = Common::where('user_id', $user->id)->paginate(6);
+        // 设置每页显示 6 条数据，并添加自定义查询参数
+        $posts = Post::where('user_id', $user->id)->paginate(6, ['*'], 'postPage');
+        $comments = Common::where('user_id', $user->id)->paginate(6, ['*'], 'commentPage');
+
+        // 同步查询参数
+        $posts->appends(['commentPage' => $request->input('commentPage')]);
+        $comments->appends(['postPage' => $request->input('postPage')]);
 
         return view('users/home', compact('user', 'posts', 'comments'));
     }
