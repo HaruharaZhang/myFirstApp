@@ -21,15 +21,23 @@ class PostFactory extends Factory
     public function definition()
     {
         $faker = Faker::create();
+        $message = '';
+        while (strlen($message) < 300) {
+            $message = implode("\n\n", $faker->paragraphs($faker->numberBetween(2, 5)));
+        }
+        if (strlen($message) > 500) {
+            $message = substr($message, 0, 500);
+        }
         return [
             //'user_id' => $faker -> randomNumber($min = 123456, $max = 123460),
-            'user_id' => User::all() -> random() -> id,
+            'user_id' => User::all()->random()->id,
             //'title' => Str::random(10),
-            'title' => $faker -> realText(rand(10, 20)),
+            'title' => $faker->realText(rand(20, 50)),
             //'desc' => Str::random(20),
-            'desc' => $faker -> sentence,
+            'desc' => $faker->sentence,
             //'message' => Str::random(40),
-            'message' => $faker -> text(),
+            //'message' => $faker->text(),
+            'message' => $message,
         ];
     }
 }

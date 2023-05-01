@@ -20,7 +20,7 @@ return new class extends Migration
             $table -> string('title');
             $table -> timestamps();
             $table -> string('desc');
-            $table -> string('message');
+            $table -> text('message');
 
             $table -> foreign('user_id') -> references('id') -> on('users')
             -> onDelete('cascade') -> onUpdate('cascade');

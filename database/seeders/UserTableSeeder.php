@@ -21,6 +21,7 @@ class UserTableSeeder extends Seeder
         $adminUser -> name = "Administrator";
         $adminUser -> email = "admin@admin";
         $adminUser -> password = Hash::make("admin123");
+        $adminUser -> avatar = 'profiles/138.jpg';
         $adminUser -> save();
 
         User::factory() -> count(50) -> create();

@@ -32,16 +32,16 @@ class AuthServiceProvider extends ServiceProvider
 
         // Post 授权策略
         Gate::define('update-post', function ($user, $post) {
-            return $user->id === $post->user_id || $user->name === 'admin';
+            return $user->id === $post->user_id || $user->name === 'Administrator';
         });
 
         // Comment 授权策略
         Gate::define('update-comment', function ($user, $comment) {
-            return $user->id === $comment->user_id || $user->name === 'admin';
+            return $user->id === $comment->user_id || $user->name === 'Administrator';
         });
 
         Gate::define('delete-comment', function (User $user, Common $comment) {
-            return $user->id === $comment->user_id || $user->name === 'admin';
+            return $user->id === $comment->user_id || $user->name === 'Administrator';
         });
     }
 }

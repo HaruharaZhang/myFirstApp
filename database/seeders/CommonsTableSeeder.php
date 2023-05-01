@@ -15,6 +15,6 @@ class CommonsTableSeeder extends Seeder
      */
     public function run()
     {
-        Common::factory() -> count(50) -> create();
+        Common::factory() -> count(300) -> create();
     }
 }
