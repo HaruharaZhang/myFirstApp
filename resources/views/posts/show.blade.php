@@ -73,7 +73,7 @@
 
         </div>
         @else
-        <p class="text-muted">Please <a href="{{ route('login') }}">login</a> to add a comment.</p>
+        <p class="text-muted">Please <a href="{{ route('users.login') }}">login</a> to add a comment.</p>
         @endauth
     </div>
 </div>
@@ -81,6 +81,20 @@
 
 @push('scripts')
 <span id="user-can-update-comment" data-value="{{ Gate::allows('update-comment', $post) ? 'true' : 'false' }}" style="display:none;"></span>
+@auth
+    <script>
+        var isUserAuthenticated = true;
+        var userAvatar = "{{ asset(Auth::user()->avatar) }}";
+        var userName = "{{ Auth::user()->name }}";
+    </script>
+@else
+    <script>
+        var isUserAuthenticated = false;
+        var userAvatar = "{{ asset('images/default-avatar.png') }}";
+        var userName = "游客";
+    </script>
+@endauth
+
 <script>
     function addCommentToDOM(comment, userAvatar, userName) {
         var formattedDate = formatDateTime(comment.created_at);
@@ -160,7 +174,7 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     var comment = response.common;
-                    addCommentToDOM(comment, "{{ asset(Auth::user()->avatar) }}", "{{ Auth::user()->name }}");
+                    addCommentToDOM(comment, userAvatar, userName);
 
                     // 清空表单内容
                     $('#content').val('');
@@ -172,11 +186,6 @@
         });
     });
 
-    // $('body').on('click', '.edit-comment-btn', function() {
-    //         var commentContainer = $(this).closest('.media-body');
-    //         commentContainer.find('.comment-content').hide();
-    //         commentContainer.find('.edit-comment').show();
-    //     });
     $('.comments').on('click', '.edit-comment-btn', function() {
         var commentContainer = $(this).closest('.media-body');
         commentContainer.find('.comment-content').hide();
