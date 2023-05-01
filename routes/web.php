@@ -8,6 +8,8 @@ use App\Http\Controllers\MyLoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,7 +86,9 @@ Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')
 Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update')->middleware('auth');
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy')->middleware('auth');
 
+Route::get('notifications', [NotificationController::class, 'index'])->middleware('auth')->name('notifications.index');
+Route::get('notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->middleware('auth')->name('notifications.markAsRead');
 
-
+Route::post('/image/upload', [ImageController::class, 'upload'])->name('image.upload');
 
 require __DIR__.'/auth.php';

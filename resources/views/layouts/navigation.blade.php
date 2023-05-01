@@ -15,6 +15,12 @@
 
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6 space-x-4">
+                    <div class="notification-bell">
+                        <a href="{{ route('notifications.index') }}">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count" style="display: none;"></span>
+                        </a>
+                    </div>
 
                     <!-- New Post Button -->
                     <a href="{{ route('posts.create') }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
@@ -38,6 +44,15 @@
             </div>
         </div>
     </div>
+    <!-- 显示/隐藏小红点 -->
+    <script>
+        $(document).ready(function() {
+            var unreadNotificationsCount = "{{ $unreadNotificationsCount }}";
+            if (unreadNotificationsCount > 0) {
+                $(".notification-count").text(unreadNotificationsCount).show();
+            }
+        });
+    </script>
     @else
     <div class="d-flex justify-content-end align-items-center">
         <p class="mr-3 mb-0">Please log in to view your name</p>

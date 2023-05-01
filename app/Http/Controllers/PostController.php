@@ -34,17 +34,22 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'desc' => 'required|string|max:255',
             'message' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $post = new Post([
-            'user_id' => Auth::id(),
-            'title' => $request->input('title'),
-            'desc' => $request->input('desc'),
-            'message' => $request->input('message'),
-        ]);
+        $post = new Post();
+        $post->user_id = Auth::id();
+        $post->title = $request->title;
+        $post->desc = $request->desc;
+        $post->message = $request->message;
+
+        if ($request->hasFile('image')) {
+            $filename = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('images'), $filename);
+            $post->image = $filename;
+        }
 
         $post->save();
-
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
     public function edit(Post $post)
@@ -58,9 +63,29 @@ class PostController extends Controller
             'title' => 'required',
             'desc' => 'required',
             'message' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $post->update($validatedData);
+        if ($request->hasFile('image')) {
+            // 删除旧图片
+            if ($post->image_url) {
+                $oldImagePath = public_path('images/' . $post->image_url);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $post->image = $imageName;
+        }
+
+        $post->title = $request->title;
+        $post->desc = $request->desc;
+        $post->message = $request->message;
+
+        $post->save();
+
         return redirect()->route('posts.show', $post)->with('success', 'Post updated successfully');
     }
 

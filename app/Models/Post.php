@@ -23,4 +23,12 @@ class Post extends Model
     public function common(){
         return $this -> hasMany(Common::class);
     }
+
+    public function getImageUrlAttribute()
+    {
+        if ($this->image) {
+            return asset('images/' . $this->image);
+        }
+        return null;
+    }
 }

@@ -4,10 +4,18 @@
 <div class="container">
     <h1>Edit Post</h1>
 
-    <form action="{{ route('posts.update', $post) }}" method="POST">
+    <form action="{{ route('posts.update', $post) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        
+
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+        </div>
+        <div class="form-group">
+            <img id="preview" src="{{ $post->image_url }}" alt="Preview Image" class="img-fluid" style="max-width: 500px;">
+        </div>
+
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" id="title" class="form-control" value="{{ $post->title }}">
@@ -33,3 +41,24 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    function previewImage(event) {
+        var input = event.target;
+        var preview = document.getElementById('preview');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            preview.src = '';
+            preview.style.display = 'none';
+        }
+    }
+</script>
+@endpush

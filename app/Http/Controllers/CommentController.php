@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Common;
 use Illuminate\Http\Request;
@@ -21,6 +22,16 @@ class CommentController extends Controller
         $comment->post_id = $post->id;
         $comment->CommonMsg = $request->content;
         $comment->save();
+        
+        if ($post->user_id != Auth::id()) {
+            $notification = new Notification([
+                'user_id' => $post->user_id,
+                'content' => 'Your post has been commented by ' . Auth::user()->name,
+                'is_read' => false,
+                'url' => $comment->post_id,
+            ]);
+            $notification->save();
+        }
 
         return response()->json(['success' => true, 'common' => $comment]);
     }

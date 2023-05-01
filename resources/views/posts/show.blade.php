@@ -18,6 +18,9 @@
         <p>{{ $post->excerpt }}</p>
         <div class="post-content">
             <p style="color: gray; font-size: 16px;">{{ $post->desc }}</p>
+            @if ($post->image_url)
+            <img src="{{ $post->image_url }}" alt="Post Image" class="img-fluid">
+            @endif
             <p>{{ $post->message }}</p>
         </div>
 
