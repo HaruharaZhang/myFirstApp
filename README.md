@@ -1,12 +1,12 @@
 # CSC348B Project
 
-English| [简体中文](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/README_ZH.md) 
+English | [简体中文](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/README_ZH.md) 
 
 This project uses the initial name it had, which is the default name when creating a new Laravel project. I couldn't come up with a more appropriate name for this project, and perhaps the default is a decent choice.
 
 ## Project Introduction
 
-This project is developed using the [Laravel] (https://laravel.com) framework and aims to create a personal information publishing platform. The platform allows users to publish information, browse information published by other users, and interact with them. The project was completed on May 2, 2023, and was submitted as an assignment for CSC348B at Swansea University. **Please do not use any code from this project for your personal assignments or academic reports.**
+This project is developed using the [Laravel](https://laravel.com) framework and aims to create a personal information publishing platform. The platform allows users to publish information, browse information published by other users, and interact with them. The project was completed on May 2, 2023, and was submitted as an assignment for CSC348B at Swansea University. **Please do not use any code from this project for your personal assignments or academic reports.**
 
 ## Project Features
 
