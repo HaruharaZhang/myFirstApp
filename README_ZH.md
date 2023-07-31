@@ -30,3 +30,20 @@
 
 ## 项目Demo
 
+### 项目视频
+
+你可以在文件主目录下的/myFirstApp/blob/main/demo/2131205.mp4 找到视频文件
+
+### 项目图片
+
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%201.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%202.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%203.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%204.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%205.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%206.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%207.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%208.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%209.png)
+![](https://github.com/HtmlIsTheBestProgrammingLanaguage/myFirstApp/blob/main/demo/ScreenCapture%210.png)
